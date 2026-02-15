@@ -28,13 +28,18 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg-gradient);
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            /* Use dvh for better mobile support */
+            min-height: 100dvh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            /* Allow vertical scrolling */
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--text-color);
             perspective: 1000px;
+            padding: 10px;
         }
 
         /* Particle Background */
@@ -124,11 +129,23 @@
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+
+            .farsi-heading {
+                font-size: 2rem;
+                margin-bottom: 1rem;
             }
 
             .container {
                 padding: 1.5rem;
+                width: 95%;
+                margin: 20px auto;
+            }
+
+            /* Adjust image height for mobile to fit better */
+            .container img {
+                max-height: 250px !important;
             }
         }
 
