@@ -368,7 +368,18 @@
         }
         createParticles();
 
-        // Auto-play on load
+        // Audio Autoplay Workaround using Global Interaction Listeners
+        function unlockAudio() {
+            playMusic();
+            // Remove listeners once audio has started
+            document.body.removeEventListener('click', unlockAudio);
+            document.body.removeEventListener('touchstart', unlockAudio);
+        }
+
+        document.body.addEventListener('click', unlockAudio);
+        document.body.addEventListener('touchstart', unlockAudio);
+
+        // Auto-play on load (still try, though it often fails on mobile)
         window.addEventListener('load', () => {
             playMusic();
         });
@@ -379,9 +390,8 @@
             const target = document.getElementById(targetId);
             target.classList.add('active');
 
-            if (targetId === 'screen-intro') {
-                playMusic();
-            }
+            // Ensure music plays when user interacts with navigation
+            playMusic();
         }
 
         // Music Control
